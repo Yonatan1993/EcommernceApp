@@ -14,6 +14,7 @@ public class ManagmentCart {
 
     private Context context;
     private TinyDB tinyDB;
+    public static final String KEY = "CartList";
 
     public ManagmentCart(Context context) {
         this.context = context;
@@ -38,14 +39,14 @@ public class ManagmentCart {
             listPop.add(item);
         }
         
-        tinyDB.putListObject("CartList",listPop);
+        tinyDB.putListObject(KEY,listPop);
         Toast.makeText(context, "Added to your cart", Toast.LENGTH_SHORT).show();
 
     }
 
     public ArrayList<PopularDomain> getListCart() {
         
-        return tinyDB.getListObject("CartList");
+        return tinyDB.getListObject(KEY);
     }
 
     public void minusNumberItem(ArrayList<PopularDomain>listItem,int position,ChangeNumberItemsListener changeNumberItemsListener){
@@ -56,14 +57,14 @@ public class ManagmentCart {
             listItem.get(position).setNumberInCart(listItem.get(position).getNumberInCart()-1);
         }
 
-        tinyDB.putListObject("CartList,",listItem);
+        tinyDB.putListObject(KEY,listItem);
         changeNumberItemsListener.change();
     }
 
     public void plusNumberItem(ArrayList<PopularDomain>listItem,int position, ChangeNumberItemsListener changeNumberItemsListener){
 
         listItem.get(position).setNumberInCart(listItem.get(position).getNumberInCart()+1);
-        tinyDB.putListObject("CartList,",listItem);
+        tinyDB.putListObject(KEY,listItem);
         changeNumberItemsListener.change();
     }
 
